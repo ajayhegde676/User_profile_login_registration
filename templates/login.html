@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body
+        {
+            font-family: Arial;
+
+        }
+
+        .form
+        {
+           width: 50%;
+            margin-left : 25%;
+
+        }
+        .loginbtn
+        {
+            background-color: green;
+            color: white;
+            padding:10px 10px;
+            border: none;
+            cursor: pointer;
+            width: 30%;
+
+        }
+        input[type=password],input[type=email]
+        {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+        .signup {
+            margin-left: 50%;
+        }
+
+    </style>
+</head>
+<body>
+
+<form  method="POST" class = "form">
+        {% csrf_token %}
+        <h1>Login</h1>
+        <hr>
+         <label for = 'email'><b>Email</b></label>
+         <input type="email" name ='email' placeholder="Enter your Email" required>
+
+          <label for = 'password'><b>Password</b></label>
+         <input type="password" name ='password' placeholder="Enter your Password" required>
+
+        <input type="submit" value="Submit" class ="loginbtn">
+    {% for msg in messages %}
+        {{ msg }}
+    {% endfor %}
+
+
+     <hr>
+    <div class="signup">
+        <p><b>New user? <a href="{% url 'registration_view' %}">Sign up here</a></b></p>
+  </div>
+
+      </form>
+
+</body>
+</html>
+

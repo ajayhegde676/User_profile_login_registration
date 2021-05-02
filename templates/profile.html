@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<script>
+    function updateform() {
+       alert("Thank you! your details will be updated")
+        return false;
+
+    }
+</script>
+<style>
+    .form
+        {
+           width: 50%;
+            margin-left : 25%;
+
+
+        }
+    input[type=text],input[type=email]
+        {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+
+            border: none;
+            background: #f1f1f1;
+        }
+    .btn
+        {
+            background-color: green;
+            color: white;
+            padding:15px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+    a {
+        padding: 15px;
+
+        background-color: green;
+        color: white;
+        text-align: center;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+</style>
+<body>
+        <form method="post" class="form">
+        {% csrf_token %}
+        <h1>User profile</h1>
+            {% for obj in data %}
+                <label for ="ufname"><b>First name</b></label>
+      <input type="text" name="ufname" value=" {{ obj.first_name}}">
+        <br>
+                <label for ="ulname"><b>Last name</b></label>
+      <input type="text" name="ulname" value=" {{ obj.last_name}}">
+         <br>
+                <label for ="uphone"><b>Phone number</b></label>
+     <input type="text" name="uphone" value="{{ obj.phone}}">
+         <br>
+                <label for ="uaddress"><b>Adresss</b></label>
+      <input type="text" name="uaddress" value="{{ obj.address}}">
+        <br>
+        <label for ="uemail"><b>Email</b></label>
+      <input type="text" name="uemail" value="{{ obj.email}}">
+
+        <input type = "submit" name ="update" value ="UPDATE" onclick="return updateform()" class="btn">
+
+    {% endfor %}
+<br>
+</form>
+<a href="{% url 'logged_out' %}">Log out</a>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+
+       body
+        {
+            font-family: Arial;
+
+        }
+
+        .form
+        {
+           width: 50%;
+            margin-left : 25%;
+
+
+        }
+        .submitbtn
+        {
+            background-color: green;
+            color: white;
+            padding:15px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type=text], input[type=password],input[type=email]
+        {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+
+    </style>
+</head>
+
+<body>
+<form method="POST" class ="form">
+      {%csrf_token %}
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account</p>
+    <hr>
+
+    {{ form.as_p }}
+    <input type="submit" class='submitbtn' value="Submit">
+
+        <div class="signin">
+            <p><b>Already have an account? <a href="{% url 'login_page' %}">Sign in</a></b></p>
+  </div>
+
+</form>
+
+</body>
+
+</html>
