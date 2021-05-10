@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import UserManager
-
 
 
 class User_data(models.Model):
@@ -11,4 +9,3 @@ class User_data(models.Model):
     address = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     password = models.CharField(max_length=50)
-    objects = UserManager()
