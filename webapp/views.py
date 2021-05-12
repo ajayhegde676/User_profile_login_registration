@@ -13,7 +13,7 @@ def registrationview(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            users = form.save()
+            form.save()
             firstname = form.cleaned_data['first_name']
             lastname = form.cleaned_data['last_name']
             username = form.cleaned_data['user_name']
