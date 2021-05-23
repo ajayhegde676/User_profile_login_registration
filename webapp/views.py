@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.core.cache import cache
+from django.contrib.auth.hashers import make_password
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -17,7 +17,7 @@ def registrationview(request):
             firstname = form.cleaned_data['first_name']
             lastname = form.cleaned_data['last_name']
             username = form.cleaned_data['user_name']
-            password = form.cleaned_data['password']
+            password = make_password(form.cleaned_data['password'])
             email = form.cleaned_data['email']
             Newuser = User.objects.create_user(
                 first_name=firstname,
@@ -35,11 +35,9 @@ def loginview(request):
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
-        query = User_data.objects.all().filter(email=email)
+        query = User_data.objects.get(email=email)
         if query:
-            user_email = query[0].email
-            cache.set('my_key', user_email, 10)
-            username = query[0].user_name
+            username = query.user_name
             user_auth = authenticate(username=username, password=password)
             if user_auth:
                 login(request, user_auth)
@@ -54,7 +52,7 @@ def loginview(request):
 
 @login_required(login_url='login_page')
 def profileview(request):
-    email = cache.get('my_key')
+    email = request.user.email
     data = User_data.objects.all().filter(email=email)
     return render(request, 'profile.html', {'data': data})
 
